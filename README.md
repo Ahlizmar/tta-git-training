@@ -16,7 +16,7 @@ Please ⭐️ this repo and share it with others
 
 |                Scientific / Dark                | Standard / Colored |
 :------------------------------------------------:|:-------------------|
- ![Dark calculator screenshot](screenshots/scientific-dark.png) | !tor screenshot](screenshots/standard-light.png)
+![Dark calculator screenshot](screenshots/scientific-dark.png) | ![Colored calculator screenshot](screenshots/standard-light.png)
 
 ## Requirements 🔧
 
@@ -83,5 +83,3 @@ Contributions are welcome! Please follow these steps to contribute:
 ## License
 
 This project is licensed under the MIT License. See the `LICENSE` file for details.
-
-
