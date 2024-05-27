@@ -8,14 +8,14 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3  # Updated to the latest version
+      uses: actions/checkout@v4  # Updated to the latest version supporting Node.js 20
       with:
         fetch-depth: 0
 
     - name: Set up JDK
-      uses: actions/setup-java@v3  # Updated to the latest version
+      uses: actions/setup-java@v4  # Updated to the latest version supporting Node.js 20
       with:
-        distribution: 'adopt'
+        distribution: 'temurin'  # Updated to 'temurin' which is the new name for AdoptOpenJDK
         java-version: '11'
 
     - name: Build with Gradle
