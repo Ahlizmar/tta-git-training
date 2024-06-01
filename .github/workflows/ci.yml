@@ -8,16 +8,27 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
 
     - name: Set up JDK 11
       uses: actions/setup-java@v3
       with:
         java-version: 11
-        distribution: 'temurin' # This specifies the JDK distribution
+        distribution: 'temurin'
+
+    - name: Install Bats
+      run: npm install -g bats
+
+    - name: Run Bats
+      run: bats -v
 
     - name: Build with Gradle
       run: ./gradlew build
