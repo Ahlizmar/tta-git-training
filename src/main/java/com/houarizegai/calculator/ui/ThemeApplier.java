@@ -13,7 +13,7 @@ public class ThemeApplier {
                                   JButton btn4, JButton btn5, JButton btn6, JButton btn7, JButton btn8, JButton btn9,
                                   JButton btnPoint, JButton btnC, JButton btnBack, JButton btnMod, JButton btnDiv,
                                   JButton btnMul, JButton btnSub, JButton btnAdd, JButton btnRoot, JButton btnLog,
-                                  JButton btnPower, JButton btnEqual, Theme theme) {
+                                  JButton btnPower, JButton btnEqual, JButton btnPi, Theme theme) {
         window.getContentPane().setBackground(hex2Color(theme.getApplicationBackground()));
 
         comboCalculatorType.setForeground(hex2Color(theme.getTextColor()));
@@ -40,6 +40,7 @@ public class ThemeApplier {
         btnRoot.setForeground(hex2Color(theme.getTextColor()));
         btnLog.setForeground(hex2Color(theme.getTextColor()));
         btnPower.setForeground(hex2Color(theme.getTextColor()));
+        btnPi.setForeground(hex2Color(theme.getTextColor()));
         btnEqual.setForeground(hex2Color(theme.getBtnEqualTextColor()));
 
         comboCalculatorType.setBackground(hex2Color(theme.getApplicationBackground()));
@@ -66,6 +67,7 @@ public class ThemeApplier {
         btnRoot.setBackground(hex2Color(theme.getOperatorBackground()));
         btnLog.setBackground(hex2Color(theme.getOperatorBackground()));
         btnPower.setBackground(hex2Color(theme.getOperatorBackground()));
+        btnPi.setBackground(hex2Color(theme.getOperatorBackground()));
         btnEqual.setBackground(hex2Color(theme.getBtnEqualBackground()));
     }
 }
