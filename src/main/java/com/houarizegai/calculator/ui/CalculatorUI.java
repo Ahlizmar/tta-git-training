@@ -1,6 +1,7 @@
 package com.houarizegai.calculator.ui;
 
 import com.houarizegai.calculator.theme.properties.Theme;
+import com.houarizegai.calculator.logic.CalculatorLogic;
 import com.houarizegai.calculator.theme.ThemeLoader;
 
 import java.awt.Cursor;
@@ -10,8 +11,6 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import java.awt.Color;
 import javax.swing.*;
-
-import static com.houarizegai.calculator.util.ColorUtil.hex2Color;
 
 public class CalculatorUI {
 
@@ -58,10 +57,12 @@ public class CalculatorUI {
     private double typedValue = 0;
 
     private final Map<String, Theme> themesMap;
+    private final CalculatorLogic logic;
 
     public CalculatorUI() {
-        themesMap = ThemeLoader.loadThemes();
+        logic = new CalculatorLogic();
 
+        themesMap = ThemeLoader.loadThemes();
         window = new JFrame(APPLICATION_TITLE);
         window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         window.setLocationRelativeTo(null);
@@ -81,38 +82,28 @@ public class CalculatorUI {
         window.setVisible(true);
     }
 
-    public double calculate(double firstNumber, double secondNumber, char operator) {
-        switch (operator) {
-            case '+':
-                return firstNumber + secondNumber;
-            case '-':
-                return firstNumber - secondNumber;
-            case '*':
-                return firstNumber * secondNumber;
-            case '/':
-                return firstNumber / secondNumber;
-            case '%':
-                return firstNumber % secondNumber;
-            case '^':
-                return Math.pow(firstNumber, secondNumber);
-            default:
-                return secondNumber;
-        }
-    }
-
     private void initThemeSelector() {
         comboTheme = createComboBox(themesMap.keySet().toArray(new String[0]), 230, 30, "Theme");
         comboTheme.addItemListener(event -> {
             if (event.getStateChange() != ItemEvent.SELECTED)
                 return;
-
+    
             String selectedTheme = (String) event.getItem();
-            applyTheme(themesMap.get(selectedTheme));
+            Theme selectedThemeObject = themesMap.get(selectedTheme);
+            applyTheme(selectedThemeObject);
         });
-
+    
+        // Apply the first theme by default
         if (themesMap.entrySet().iterator().hasNext()) {
-            applyTheme(themesMap.entrySet().iterator().next().getValue());
+            Theme defaultTheme = themesMap.entrySet().iterator().next().getValue();
+            applyTheme(defaultTheme);
         }
+    }
+
+    private void applyTheme(Theme theme) {
+        ThemeApplier.applyTheme(window, comboCalculatorType, comboTheme, inputScreen, btn0, btn1, btn2, btn3,
+                btn4, btn5, btn6, btn7, btn8, btn9, btnPoint, btnC, btnBack, btnMod, btnDiv, btnMul,
+                btnSub, btnAdd, btnRoot, btnLog, btnPower, btnEqual, theme);
     }
 
     private void initInputScreen(int[] columns, int[] rows) {
@@ -175,7 +166,7 @@ public class CalculatorUI {
             if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()) || !go)
                 return;
 
-            typedValue = calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
+            typedValue = logic.calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
             if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                 inputScreen.setText(String.valueOf((int) typedValue));
             } else {
@@ -192,7 +183,7 @@ public class CalculatorUI {
                 return;
 
             if (go) {
-                typedValue = calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
+                typedValue = logic.calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
                 if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int) typedValue));
                 } else {
@@ -236,6 +227,7 @@ public class CalculatorUI {
             go = true;
         });
 
+
         btn9 = createButton("9", columns[2], rows[2]);
         btn9.addActionListener(event -> {
             if (addToDisplay) {
@@ -257,7 +249,7 @@ public class CalculatorUI {
                 return;
 
             if (go) {
-                typedValue = calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
+                typedValue = logic.calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
                 if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int) typedValue));
                 } else {
@@ -322,7 +314,7 @@ public class CalculatorUI {
                 return;
 
             if (go) {
-                typedValue = calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
+                typedValue = logic.calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
                 if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int) typedValue));
                 } else {
@@ -388,7 +380,7 @@ public class CalculatorUI {
                 return;
 
             if (go) {
-                typedValue = calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
+                typedValue = logic.calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
                 if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int) typedValue));
                 } else {
@@ -436,7 +428,7 @@ public class CalculatorUI {
                 return;
 
             if (go) {
-                typedValue = calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
+                typedValue = logic.calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
                 if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int) typedValue));
                 } else {
@@ -472,7 +464,7 @@ public class CalculatorUI {
                 return;
 
             if (go) {
-                typedValue = calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
+                typedValue = logic.calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
                 if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int) typedValue));
                 } else {
@@ -527,60 +519,5 @@ public class CalculatorUI {
 
         return btn;
     }
-
-    private void applyTheme(Theme theme) {
-        window.getContentPane().setBackground(hex2Color(theme.getApplicationBackground()));
-
-        comboCalculatorType.setForeground(hex2Color(theme.getTextColor()));
-        comboTheme.setForeground(hex2Color(theme.getTextColor()));
-        inputScreen.setForeground(hex2Color(theme.getTextColor()));
-        btn0.setForeground(hex2Color(theme.getTextColor()));
-        btn1.setForeground(hex2Color(theme.getTextColor()));
-        btn2.setForeground(hex2Color(theme.getTextColor()));
-        btn3.setForeground(hex2Color(theme.getTextColor()));
-        btn4.setForeground(hex2Color(theme.getTextColor()));
-        btn5.setForeground(hex2Color(theme.getTextColor()));
-        btn6.setForeground(hex2Color(theme.getTextColor()));
-        btn7.setForeground(hex2Color(theme.getTextColor()));
-        btn8.setForeground(hex2Color(theme.getTextColor()));
-        btn9.setForeground(hex2Color(theme.getTextColor()));
-        btnPoint.setForeground(hex2Color(theme.getTextColor()));
-        btnC.setForeground(hex2Color(theme.getTextColor()));
-        btnBack.setForeground(hex2Color(theme.getTextColor()));
-        btnMod.setForeground(hex2Color(theme.getTextColor()));
-        btnDiv.setForeground(hex2Color(theme.getTextColor()));
-        btnMul.setForeground(hex2Color(theme.getTextColor()));
-        btnSub.setForeground(hex2Color(theme.getTextColor()));
-        btnAdd.setForeground(hex2Color(theme.getTextColor()));
-        btnRoot.setForeground(hex2Color(theme.getTextColor()));
-        btnLog.setForeground(hex2Color(theme.getTextColor()));
-        btnPower.setForeground(hex2Color(theme.getTextColor()));
-        btnEqual.setForeground(hex2Color(theme.getBtnEqualTextColor()));
-
-        comboCalculatorType.setBackground(hex2Color(theme.getApplicationBackground()));
-        comboTheme.setBackground(hex2Color(theme.getApplicationBackground()));
-        inputScreen.setBackground(hex2Color(theme.getApplicationBackground()));
-        btn0.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn1.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn2.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn3.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn4.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn5.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn6.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn7.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn8.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn9.setBackground(hex2Color(theme.getNumbersBackground()));
-        btnPoint.setBackground(hex2Color(theme.getNumbersBackground()));
-        btnC.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnBack.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnMod.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnDiv.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnMul.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnSub.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnAdd.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnRoot.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnLog.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnPower.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnEqual.setBackground(hex2Color(theme.getBtnEqualBackground()));
-    }
+    
 }

@@ -1,4 +1,4 @@
-name: Java CI with Gradle
+name: Java CI with Maven
 
 on:
   push:
@@ -19,9 +19,11 @@ jobs:
     - name: Set up JDK
       uses: actions/setup-java@v4  # Updated to the latest version supporting Node.js 20
       with:
-        distribution: 'temurin'  # Updated to 'temurin' which is the new name for AdoptOpenJDK
+        distribution: 'adopt'
         java-version: '11'
 
-    - name: Build with Gradle
-      run: ./gradlew build
+    - name: Build with Maven
+      run: mvn clean install
 
+    - name: Run tests with Maven
+      run: mvn test

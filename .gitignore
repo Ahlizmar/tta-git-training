@@ -4,4 +4,5 @@ out/
 *.iml
 
 # Maven
-target/
+target/.DS_Store
+build/
