@@ -50,6 +50,7 @@ public class CalculatorUI {
     private JButton btnRoot;
     private JButton btnPower;
     private JButton btnLog;
+    private JButton btnPi;
 
     private char selectedOperator = ' ';
     private boolean go = true; // For calculate with Opt != (=)
@@ -103,7 +104,7 @@ public class CalculatorUI {
     private void applyTheme(Theme theme) {
         ThemeApplier.applyTheme(window, comboCalculatorType, comboTheme, inputScreen, btn0, btn1, btn2, btn3,
                 btn4, btn5, btn6, btn7, btn8, btn9, btnPoint, btnC, btnBack, btnMod, btnDiv, btnMul,
-                btnSub, btnAdd, btnRoot, btnLog, btnPower, btnEqual, theme);
+                btnSub, btnAdd, btnRoot, btnLog, btnPower, btnEqual, btnPi, theme);
     }
 
     private void initInputScreen(int[] columns, int[] rows) {
@@ -128,12 +129,14 @@ public class CalculatorUI {
                     btnRoot.setVisible(false);
                     btnPower.setVisible(false);
                     btnLog.setVisible(false);
+                    btnPi.setVisible(false);
                     break;
                 case "Scientific":
                     window.setSize(WINDOW_WIDTH + 80, WINDOW_HEIGHT);
                     btnRoot.setVisible(true);
                     btnPower.setVisible(true);
                     btnLog.setVisible(true);
+                    btnPi.setVisible(true);
                     break;
             }
         });
@@ -497,6 +500,24 @@ public class CalculatorUI {
             }
         });
         btnLog.setVisible(false);
+
+        btnPi = createButton("\u03C0", columns[4], rows[4]);
+        btnPi.addActionListener(event -> {
+            if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
+                return;
+
+            if (go) {
+                typedValue = Math.PI * Double.parseDouble(inputScreen.getText());
+                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
+                    inputScreen.setText(String.valueOf((int) typedValue));
+                } else {
+                    inputScreen.setText(String.valueOf(typedValue));
+                }
+                selectedOperator = 'P';
+                addToDisplay = false;
+            }
+        });
+        btnPi.setVisible(false);
     }
 
     private JComboBox<String> createComboBox(String[] items, int x, int y, String toolTip) {
