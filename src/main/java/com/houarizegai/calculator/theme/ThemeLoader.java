@@ -20,11 +20,9 @@ public class ThemeLoader {
         ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
         mapper.findAndRegisterModules();
         try {
-            // Load themes from application.yaml
             ThemeList themeList = mapper.readValue(new File("src/main/resources/application.yaml"), ThemeList.class);
             return themeList.getThemesAsMap();
         } catch (IOException e) {
-            // Return an empty map in case of an error
             return Collections.emptyMap();
         }
     }

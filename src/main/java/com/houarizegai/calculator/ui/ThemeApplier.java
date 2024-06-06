@@ -14,13 +14,11 @@ public class ThemeApplier {
                                   JButton btnPoint, JButton btnC, JButton btnBack, JButton btnMod, JButton btnDiv,
                                   JButton btnMul, JButton btnSub, JButton btnAdd, JButton btnRoot, JButton btnLog,
                                   JButton btnPower, JButton btnEqual, JButton btnPi, Theme theme) {
-        // Apply the application background color
         window.getContentPane().setBackground(hex2Color(theme.getApplicationBackground()));
 
-        // Apply text colors
         comboCalculatorType.setForeground(hex2Color(theme.getTextColor()));
         comboTheme.setForeground(hex2Color(theme.getTextColor()));
-        inputScreen.setForeground(hex2Color(theme.getDisplayTextColor())); // Updated for display text color
+        inputScreen.setForeground(hex2Color(theme.getTextColor()));
         btn0.setForeground(hex2Color(theme.getTextColor()));
         btn1.setForeground(hex2Color(theme.getTextColor()));
         btn2.setForeground(hex2Color(theme.getTextColor()));
@@ -45,7 +43,6 @@ public class ThemeApplier {
         btnPi.setForeground(hex2Color(theme.getTextColor()));
         btnEqual.setForeground(hex2Color(theme.getBtnEqualTextColor()));
 
-        // Apply background colors
         comboCalculatorType.setBackground(hex2Color(theme.getApplicationBackground()));
         comboTheme.setBackground(hex2Color(theme.getApplicationBackground()));
         inputScreen.setBackground(hex2Color(theme.getApplicationBackground()));

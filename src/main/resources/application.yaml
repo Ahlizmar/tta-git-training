@@ -1,30 +1,15 @@
 themes:
   - name: Light
     applicationBackground: f0f3f9
-    textColor: 10100f
-    operatorBackground: e0e0e0
+    textColor: 000000
+    operatorBackground: f7f9fc
     numbersBackground: ffffff
-    btnEqualTextColor: 10100f
-    btnEqualBackground: 007bff
-
+    btnEqualTextColor: ffffff
+    btnEqualBackground: 0067c0
   - name: Dark
-    applicationBackground: 2e2e2e
-    textColor: 10100f
-    operatorBackground: 4a4a4a
-    numbersBackground: 3e3e3e
-    btnEqualTextColor: 10100f
-    btnEqualBackground: 1e90ff
-    selectionBackground: e0e0e0 # Added selection background for dark theme
-    selectionTextColor: 000000de # Added selection text color for dark theme
-    displayTextColor: f8f8f7 # Added display text color for dark theme
-
-  - name: Violet
-    applicationBackground: 41344e
-    textColor: 10100f
-    operatorBackground: 4e4a59
-    numbersBackground: f8f8f7
-    btnEqualTextColor: 10100f
-    btnEqualBackground: f8f8f7
-    selectionBackground: e0e0e0 # Added selection background for violet theme
-    selectionTextColor: 000000de # Added selection text color for violet theme
-    displayTextColor: f8f8f7 # Added display text color for violet theme
+    applicationBackground: 1c2028
+    textColor: ffffff
+    operatorBackground: 2d333d
+    numbersBackground: 363c47
+    btnEqualTextColor: ffffff
+    btnEqualBackground: 4cc2ff

@@ -28,4 +28,8 @@ public class CalculatorLogic {
     public double log(double number) {
         return Math.log(number);
     }
+    public double PI(double number) {
+        return Math.PI * number;
+    }
 }
+
