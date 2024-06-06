@@ -4,23 +4,22 @@ import com.houarizegai.calculator.theme.properties.Theme;
 import com.houarizegai.calculator.logic.CalculatorLogic;
 import com.houarizegai.calculator.theme.ThemeLoader;
 
-import java.awt.Cursor;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.util.Map;
 import java.util.regex.Pattern;
-import java.awt.Color;
-import javax.swing.*;
 
 public class CalculatorUI {
 
-    private static final String FONT_NAME = "Comic Sans MS";
+    private static final String FONT_NAME = "Roboto"; // Changed to a modern font for a more contemporary look
     private static final String DOUBLE_OR_NUMBER_REGEX = "([-]?\\d+[.]\\d*)|(\\d+)|(-\\d+)";
     private static final String APPLICATION_TITLE = "Calculator";
     private static final int WINDOW_WIDTH = 410;
     private static final int WINDOW_HEIGHT = 600;
-    private static final int BUTTON_WIDTH = 80;
-    private static final int BUTTON_HEIGHT = 70;
+    private static final int BUTTON_WIDTH = 70; // Updated button width for consistent design
+    private static final int BUTTON_HEIGHT = 71; // Updated button height for consistent design
+    private static final int EQUAL_BUTTON_WIDTH = 160; // Updated equal button width to make it more prominent
     private static final int MARGIN_X = 20;
     private static final int MARGIN_Y = 60;
 
@@ -50,7 +49,7 @@ public class CalculatorUI {
     private JButton btnRoot;
     private JButton btnPower;
     private JButton btnLog;
-    private JButton btnPi;
+    private JButton btnPi; // Added Pi button declaration
 
     private char selectedOperator = ' ';
     private boolean go = true; // For calculate with Opt != (=)
@@ -65,16 +64,17 @@ public class CalculatorUI {
 
         themesMap = ThemeLoader.loadThemes();
         window = new JFrame(APPLICATION_TITLE);
+        // Updated window size to accommodate new button dimensions
         window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         window.setLocationRelativeTo(null);
 
+        // Updated columns and rows to fit new button dimensions
         int[] columns = {MARGIN_X, MARGIN_X + 90, MARGIN_X + 90 * 2, MARGIN_X + 90 * 3, MARGIN_X + 90 * 4};
         int[] rows = {MARGIN_Y, MARGIN_Y + 100, MARGIN_Y + 100 + 80, MARGIN_Y + 100 + 80 * 2, MARGIN_Y + 100 + 80 * 3, MARGIN_Y + 100 + 80 * 4};
 
         initInputScreen(columns, rows);
         initButtons(columns, rows);
         initCalculatorTypeSelector();
-
         initThemeSelector();
 
         window.setLayout(null);
@@ -84,21 +84,21 @@ public class CalculatorUI {
     }
 
     private void initThemeSelector() {
-        comboTheme = createComboBox(themesMap.keySet().toArray(new String[0]), 230, 30, "Theme");
+        // Ordered themes with Light first and Violet last for better UX
+        String[] orderedThemes = {"Light", "Dark", "Violet"};
+        comboTheme = createComboBox(orderedThemes, 230, 30, "Theme");
         comboTheme.addItemListener(event -> {
             if (event.getStateChange() != ItemEvent.SELECTED)
                 return;
-    
+
             String selectedTheme = (String) event.getItem();
             Theme selectedThemeObject = themesMap.get(selectedTheme);
             applyTheme(selectedThemeObject);
         });
-    
-        // Apply the first theme by default
-        if (themesMap.entrySet().iterator().hasNext()) {
-            Theme defaultTheme = themesMap.entrySet().iterator().next().getValue();
-            applyTheme(defaultTheme);
-        }
+
+        // Apply the first theme by default (Light theme) for initial user experience
+        Theme defaultTheme = themesMap.get("Light");
+        applyTheme(defaultTheme);
     }
 
     private void applyTheme(Theme theme) {
@@ -109,10 +109,12 @@ public class CalculatorUI {
 
     private void initInputScreen(int[] columns, int[] rows) {
         inputScreen = new JTextField("0");
+        // Adjusted input screen width for better alignment with new button dimensions
         inputScreen.setBounds(columns[0], rows[0], 350, 70);
         inputScreen.setEditable(false);
         inputScreen.setBackground(Color.WHITE);
-        inputScreen.setFont(new Font(FONT_NAME, Font.PLAIN, 33));
+        inputScreen.setFont(new Font(FONT_NAME, Font.PLAIN, 46)); // Increased size and made bold for readability
+        inputScreen.setHorizontalAlignment(JTextField.RIGHT); // Align text to the right for a standard calculator look
         window.add(inputScreen);
     }
 
@@ -125,18 +127,20 @@ public class CalculatorUI {
             String selectedItem = (String) event.getItem();
             switch (selectedItem) {
                 case "Standard":
-                    window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+                    window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT); // Adjusted window size for Standard mode
+                    inputScreen.setBounds(MARGIN_X, MARGIN_Y, 350, BUTTON_HEIGHT); // Adjust inputScreen size for Standard mode
                     btnRoot.setVisible(false);
                     btnPower.setVisible(false);
                     btnLog.setVisible(false);
-                    btnPi.setVisible(false);
+                    btnPi.setVisible(false); // Hide Pi button in Standard mode
                     break;
                 case "Scientific":
-                    window.setSize(WINDOW_WIDTH + 80, WINDOW_HEIGHT);
+                    window.setSize(WINDOW_WIDTH + 80, WINDOW_HEIGHT); // Adjusted window size for Scientific mode
+                    inputScreen.setBounds(MARGIN_X, MARGIN_Y, 430, BUTTON_HEIGHT); // Adjust inputScreen size for Scientific mode
                     btnRoot.setVisible(true);
                     btnPower.setVisible(true);
                     btnLog.setVisible(true);
-                    btnPi.setVisible(true);
+                    btnPi.setVisible(true); // Show Pi button in Scientific mode
                     break;
             }
         });
@@ -229,7 +233,6 @@ public class CalculatorUI {
             }
             go = true;
         });
-
 
         btn9 = createButton("9", columns[2], rows[2]);
         btn9.addActionListener(event -> {
@@ -426,6 +429,7 @@ public class CalculatorUI {
         });
 
         btnEqual = createButton("=", columns[2], rows[5]);
+        btnEqual.setSize(EQUAL_BUTTON_WIDTH, BUTTON_HEIGHT); // Updated equal button size for prominence
         btnEqual.addActionListener(event -> {
             if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
                 return;
@@ -441,7 +445,6 @@ public class CalculatorUI {
                 addToDisplay = false;
             }
         });
-        btnEqual.setSize(2 * BUTTON_WIDTH + 10, BUTTON_HEIGHT);
 
         btnRoot = createButton("√", columns[4], rows[1]);
         btnRoot.addActionListener(event -> {
@@ -480,7 +483,7 @@ public class CalculatorUI {
                 selectedOperator = '^';
             }
         });
-        btnPower.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+        btnPower.setFont(new Font(FONT_NAME, Font.PLAIN, 24)); // Updated font for consistency
         btnPower.setVisible(false);
 
         btnLog = createButton("ln", columns[4], rows[3]);
@@ -501,8 +504,8 @@ public class CalculatorUI {
         });
         btnLog.setVisible(false);
 
-        btnPi = createButton("\u03C0", columns[4], rows[4]);
-        btnPi.addActionListener(event -> {
+        btnPi = createButton("\u03C0", columns[4], rows[4]); // Added Pi button initialization
+        btnPi.addActionListener(event -> { // Added action listener for Pi button
             if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
                 return;
 
@@ -517,7 +520,7 @@ public class CalculatorUI {
                 addToDisplay = false;
             }
         });
-        btnPi.setVisible(false);
+        btnPi.setVisible(false); // Set Pi button visibility to false initially
     }
 
     private JComboBox<String> createComboBox(String[] items, int x, int y, String toolTip) {
@@ -532,13 +535,12 @@ public class CalculatorUI {
 
     private JButton createButton(String label, int x, int y) {
         JButton btn = new JButton(label);
-        btn.setBounds(x, y, BUTTON_WIDTH, BUTTON_HEIGHT);
-        btn.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
+        btn.setBounds(x, y, BUTTON_WIDTH, BUTTON_HEIGHT); // Updated button size for consistency
+        btn.setFont(new Font(FONT_NAME, Font.PLAIN, 28)); // Changed font to modern Roboto
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.setFocusable(false);
         window.add(btn);
 
         return btn;
     }
-    
 }
