@@ -9,6 +9,9 @@ public class Theme {
     private String operatorBackground;
     private String numbersBackground;
     private String btnEqualBackground;
+    private String selectionBackground; // Added for additional themes
+    private String selectionTextColor; // Added for additional themes
+    private String displayTextColor; // Added for additional themes
 
     public String getName() {
         return name;
@@ -64,5 +67,30 @@ public class Theme {
 
     public void setBtnEqualBackground(String btnEqualBackground) {
         this.btnEqualBackground = btnEqualBackground;
+    }
+
+    // Getters and setters for the new properties
+    public String getSelectionBackground() {
+        return selectionBackground;
+    }
+
+    public void setSelectionBackground(String selectionBackground) {
+        this.selectionBackground = selectionBackground;
+    }
+
+    public String getSelectionTextColor() {
+        return selectionTextColor;
+    }
+
+    public void setSelectionTextColor(String selectionTextColor) {
+        this.selectionTextColor = selectionTextColor;
+    }
+
+    public String getDisplayTextColor() {
+        return displayTextColor;
+    }
+
+    public void setDisplayTextColor(String displayTextColor) {
+        this.displayTextColor = displayTextColor;
     }
 }
