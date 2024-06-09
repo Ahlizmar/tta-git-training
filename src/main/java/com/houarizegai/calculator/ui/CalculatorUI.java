@@ -20,7 +20,7 @@ public class CalculatorUI {
     private static final int BUTTON_WIDTH = 70; // Updated button width for consistent design
     private static final int BUTTON_HEIGHT = 71; // Updated button height for consistent design
     private static final int EQUAL_BUTTON_WIDTH = 160; // Updated equal button width to make it more prominent
-    private static final int MARGIN_X = 20;
+    private static final int MARGIN_X = (WINDOW_WIDTH - (BUTTON_WIDTH * 4 + 3 * 20)) / 2; // Adjusted margin to center elements
     private static final int MARGIN_Y = 60;
 
     private final JFrame window;
@@ -50,6 +50,9 @@ public class CalculatorUI {
     private JButton btnPower;
     private JButton btnLog;
     private JButton btnPi; // Added Pi button declaration
+    private JButton btnSin; // Added sine button declaration
+    private JButton btnCos; // Added cosine button declaration
+    private JButton btnTan; // Added tangent button declaration
 
     private char selectedOperator = ' ';
     private boolean go = true; // For calculate with Opt != (=)
@@ -64,12 +67,13 @@ public class CalculatorUI {
 
         themesMap = ThemeLoader.loadThemes();
         window = new JFrame(APPLICATION_TITLE);
-        // Updated window size to accommodate new button dimensions
-        window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+
+        // Adjusted window size to accommodate new button dimensions
+        window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT); // Use WINDOW_WIDTH and WINDOW_HEIGHT for standard mode
         window.setLocationRelativeTo(null);
 
         // Updated columns and rows to fit new button dimensions
-        int[] columns = {MARGIN_X, MARGIN_X + 90, MARGIN_X + 90 * 2, MARGIN_X + 90 * 3, MARGIN_X + 90 * 4};
+        int[] columns = {MARGIN_X, MARGIN_X + 90, MARGIN_X + 90 * 2, MARGIN_X + 90 * 3, MARGIN_X + 90 * 4, MARGIN_X + 90 * 5};
         int[] rows = {MARGIN_Y, MARGIN_Y + 100, MARGIN_Y + 100 + 80, MARGIN_Y + 100 + 80 * 2, MARGIN_Y + 100 + 80 * 3, MARGIN_Y + 100 + 80 * 4};
 
         initInputScreen(columns, rows);
@@ -113,13 +117,13 @@ public class CalculatorUI {
         inputScreen.setBounds(columns[0], rows[0], 350, 70);
         inputScreen.setEditable(false);
         inputScreen.setBackground(Color.WHITE);
-        inputScreen.setFont(new Font(FONT_NAME, Font.PLAIN, 46)); // Increased size and made bold for readability
+        inputScreen.setFont(new Font(FONT_NAME, Font.PLAIN, 36)); // Increased size and made bold for readability
         inputScreen.setHorizontalAlignment(JTextField.RIGHT); // Align text to the right for a standard calculator look
         window.add(inputScreen);
     }
 
     private void initCalculatorTypeSelector() {
-        comboCalculatorType = createComboBox(new String[]{"Standard", "Scientific"}, 20, 30, "Calculator type");
+        comboCalculatorType = createComboBox(new String[]{"Standard", "Scientific"}, 50, 30, "Calculator type");
         comboCalculatorType.addItemListener(event -> {
             if (event.getStateChange() != ItemEvent.SELECTED)
                 return;
@@ -127,20 +131,26 @@ public class CalculatorUI {
             String selectedItem = (String) event.getItem();
             switch (selectedItem) {
                 case "Standard":
-                    window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT); // Adjusted window size for Standard mode
-                    inputScreen.setBounds(MARGIN_X, MARGIN_Y, 350, BUTTON_HEIGHT); // Adjust inputScreen size for Standard mode
+                    window.setSize(WINDOW_WIDTH, WINDOW_HEIGHT); // Keep the original window size for Standard mode
+                    inputScreen.setBounds(MARGIN_X, MARGIN_Y, 350, 70); // Adjust inputScreen size for Standard mode
                     btnRoot.setVisible(false);
                     btnPower.setVisible(false);
                     btnLog.setVisible(false);
                     btnPi.setVisible(false); // Hide Pi button in Standard mode
+                    btnSin.setVisible(false); // Hide sine button in Standard mode
+                    btnCos.setVisible(false); // Hide cosine button in Standard mode
+                    btnTan.setVisible(false); // Hide tangent button in Standard mode
                     break;
                 case "Scientific":
-                    window.setSize(WINDOW_WIDTH + 80, WINDOW_HEIGHT); // Adjusted window size for Scientific mode
-                    inputScreen.setBounds(MARGIN_X, MARGIN_Y, 430, BUTTON_HEIGHT); // Adjust inputScreen size for Scientific mode
+                    window.setSize(580, WINDOW_HEIGHT); // Adjust the width and keep the height the same for Scientific mode
+                    inputScreen.setBounds(MARGIN_X, MARGIN_Y, 510, 70); // Adjust inputScreen size for Scientific mode
                     btnRoot.setVisible(true);
                     btnPower.setVisible(true);
                     btnLog.setVisible(true);
                     btnPi.setVisible(true); // Show Pi button in Scientific mode
+                    btnSin.setVisible(true); // Show sine button in Scientific mode
+                    btnCos.setVisible(true); // Show cosine button in Scientific mode
+                    btnTan.setVisible(true); // Show tangent button in Scientific mode
                     break;
             }
         });
@@ -521,6 +531,66 @@ public class CalculatorUI {
             }
         });
         btnPi.setVisible(false); // Set Pi button visibility to false initially
+
+        btnSin = createButton("sin", columns[5], rows[1]);
+        btnSin.addActionListener(event -> {
+            if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
+                return;
+
+            if (go) {
+                double inputValue = Double.parseDouble(inputScreen.getText());
+                double result = logic.sin(inputValue);
+                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(result))) {
+                    inputScreen.setText(String.valueOf((int) result));
+                } else {
+                    inputScreen.setText(String.valueOf(result));
+                }
+                selectedOperator = 's';
+                addToDisplay = false;
+            }
+        });
+        btnSin.setVisible(false); // Set sine button visibility to false initially
+        window.add(btnSin); // Add sine button to window
+
+        btnCos = createButton("cos", columns[5], rows[2]);
+        btnCos.addActionListener(event -> {
+            if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
+                return;
+
+            if (go) {
+                double inputValue = Double.parseDouble(inputScreen.getText());
+                double result = logic.cos(inputValue);
+                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(result))) {
+                    inputScreen.setText(String.valueOf((int) result));
+                } else {
+                    inputScreen.setText(String.valueOf(result));
+                }
+                selectedOperator = 'c';
+                addToDisplay = false;
+            }
+        });
+        btnCos.setVisible(false); // Set cosine button visibility to false initially
+        window.add(btnCos); // Add cosine button to window
+
+        btnTan = createButton("tan", columns[5], rows[3]);
+        btnTan.addActionListener(event -> {
+            if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
+                return;
+
+            if (go) {
+                double inputValue = Double.parseDouble(inputScreen.getText());
+                double result = logic.tan(inputValue);
+                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(result))) {
+                    inputScreen.setText(String.valueOf((int) result));
+                } else {
+                    inputScreen.setText(String.valueOf(result));
+                }
+                selectedOperator = 't';
+                addToDisplay = false;
+            }
+        });
+        btnTan.setVisible(false); // Set tangent button visibility to false initially
+        window.add(btnTan); // Add tangent button to window
     }
 
     private JComboBox<String> createComboBox(String[] items, int x, int y, String toolTip) {
@@ -535,12 +605,11 @@ public class CalculatorUI {
 
     private JButton createButton(String label, int x, int y) {
         JButton btn = new JButton(label);
-        btn.setBounds(x, y, BUTTON_WIDTH, BUTTON_HEIGHT); // Updated button size for consistency
-        btn.setFont(new Font(FONT_NAME, Font.PLAIN, 28)); // Changed font to modern Roboto
+        btn.setBounds(x, y, BUTTON_WIDTH, BUTTON_HEIGHT); // Set button size for consistency
+        btn.setFont(new Font(FONT_NAME, Font.PLAIN, 25)); // Set font size for all buttons here
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.setFocusable(false);
         window.add(btn);
-
         return btn;
     }
 }
