@@ -1,13 +1,13 @@
 package com.houarizegai.calculator.theme.properties;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 public class ThemeList {
     private List<Theme> themes;
 
+    // Getter and setter for the list of themes
     public List<Theme> getThemes() {
         return themes;
     }
@@ -16,7 +16,12 @@ public class ThemeList {
         this.themes = themes;
     }
 
+    // Method to convert the list of themes to a map
     public Map<String, Theme> getThemesAsMap() {
-        return themes.stream().collect(Collectors.toMap(Theme::getName, Function.identity()));
+        Map<String, Theme> themesMap = new HashMap<>();
+        for (Theme theme : themes) {
+            themesMap.put(theme.getName(), theme);
+        }
+        return themesMap;
     }
 }

@@ -31,5 +31,21 @@ public class CalculatorLogic {
     public double PI(double number) {
         return Math.PI * number;
     }
+
+    // Method to calculate sine of a number (in degrees)
+    // Added sine function
+    public double sin(double number) {
+        return Math.sin(Math.toRadians(number)); // Convert degrees to radians
+    }
+
+    // Added cosine function
+    public double cos(double number) {
+        return Math.cos(Math.toRadians(number)); // Convert degrees to radians
+    }
+
+    // Method to calculate tangent of a number (in degrees)
+    public double tan(double number) {
+        return Math.tan(Math.toRadians(number)); // Convert degrees to radians
+    }
 }
 
