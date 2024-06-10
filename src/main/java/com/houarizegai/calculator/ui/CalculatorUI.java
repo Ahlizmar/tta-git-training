@@ -496,13 +496,13 @@ public class CalculatorUI {
         btnPower.setFont(new Font(FONT_NAME, Font.PLAIN, 24)); // Updated font for consistency
         btnPower.setVisible(false);
 
-        btnLog = createButton("ln", columns[4], rows[3]);
+        btnLog = createButton("log", columns[4], rows[3]);
         btnLog.addActionListener(event -> {
             if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
                 return;
 
             if (go) {
-                typedValue = Math.log(Double.parseDouble(inputScreen.getText()));
+                typedValue = logic.log(Double.parseDouble(inputScreen.getText()));
                 if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int)typedValue));
                 } else {
