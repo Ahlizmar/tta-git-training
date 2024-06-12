@@ -4,14 +4,18 @@ public class Theme {
 
     private String name;
     private String applicationBackground;
-    private String textColor;
+    private String buttonTextColor;
     private String btnEqualTextColor;
     private String operatorBackground;
     private String numbersBackground;
     private String btnEqualBackground;
-    private String selectionBackground; // Added for additional themes
-    private String selectionTextColor; // Added for additional themes
-    private String displayTextColor; // Added for additional themes
+    private String selectionBackground;
+    private String selectionTextColor;
+    private String displayTextColor;
+    private String themeSelectionTextColor;
+
+    // Getter and setter methods for all properties
+    // These methods follow Java Bean conventions, making the class properties accessible and mutable.
 
     public String getName() {
         return name;
@@ -29,12 +33,12 @@ public class Theme {
         this.applicationBackground = applicationBackground;
     }
 
-    public String getTextColor() {
-        return textColor;
+    public String getButtonTextColor() {
+        return buttonTextColor;
     }
 
-    public void setTextColor(String textColor) {
-        this.textColor = textColor;
+    public void setButtonTextColor(String buttonTextColor) {
+        this.buttonTextColor = buttonTextColor;
     }
 
     public String getBtnEqualTextColor() {
@@ -69,7 +73,6 @@ public class Theme {
         this.btnEqualBackground = btnEqualBackground;
     }
 
-    // Getters and setters for the new properties
     public String getSelectionBackground() {
         return selectionBackground;
     }
@@ -92,5 +95,13 @@ public class Theme {
 
     public void setDisplayTextColor(String displayTextColor) {
         this.displayTextColor = displayTextColor;
+    }
+
+    public String getThemeSelectionTextColor() {
+        return themeSelectionTextColor;
+    }
+
+    public void setThemeSelectionTextColor(String themeSelectionTextColor) {
+        this.themeSelectionTextColor = themeSelectionTextColor;
     }
 }
