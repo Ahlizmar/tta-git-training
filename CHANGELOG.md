@@ -2,8 +2,6 @@
 
 All important changes to this project will be documented in this file.
 
-## [Unreleased]  
-
 ### Added
 - Introduced `CalculatorLogic` class to handle all calculation-related functionalities.
 - Created `ThemeLoader` class to handle loading themes from the YAML configuration file.

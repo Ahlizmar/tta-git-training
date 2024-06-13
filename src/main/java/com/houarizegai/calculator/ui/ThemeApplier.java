@@ -14,60 +14,49 @@ public class ThemeApplier {
                                   JButton btnPoint, JButton btnC, JButton btnBack, JButton btnMod, JButton btnDiv,
                                   JButton btnMul, JButton btnSub, JButton btnAdd, JButton btnRoot, JButton btnLog,
                                   JButton btnPower, JButton btnEqual, JButton btnPi, Theme theme) {
+        // Set application background color
         window.getContentPane().setBackground(hex2Color(theme.getApplicationBackground()));
 
-        comboCalculatorType.setForeground(hex2Color(theme.getTextColor()));
-        comboTheme.setForeground(hex2Color(theme.getTextColor()));
-        inputScreen.setForeground(hex2Color(theme.getTextColor()));
-        btn0.setForeground(hex2Color(theme.getTextColor()));
-        btn1.setForeground(hex2Color(theme.getTextColor()));
-        btn2.setForeground(hex2Color(theme.getTextColor()));
-        btn3.setForeground(hex2Color(theme.getTextColor()));
-        btn4.setForeground(hex2Color(theme.getTextColor()));
-        btn5.setForeground(hex2Color(theme.getTextColor()));
-        btn6.setForeground(hex2Color(theme.getTextColor()));
-        btn7.setForeground(hex2Color(theme.getTextColor()));
-        btn8.setForeground(hex2Color(theme.getTextColor()));
-        btn9.setForeground(hex2Color(theme.getTextColor()));
-        btnPoint.setForeground(hex2Color(theme.getTextColor()));
-        btnC.setForeground(hex2Color(theme.getTextColor()));
-        btnBack.setForeground(hex2Color(theme.getTextColor()));
-        btnMod.setForeground(hex2Color(theme.getTextColor()));
-        btnDiv.setForeground(hex2Color(theme.getTextColor()));
-        btnMul.setForeground(hex2Color(theme.getTextColor()));
-        btnSub.setForeground(hex2Color(theme.getTextColor()));
-        btnAdd.setForeground(hex2Color(theme.getTextColor()));
-        btnRoot.setForeground(hex2Color(theme.getTextColor()));
-        btnLog.setForeground(hex2Color(theme.getTextColor()));
-        btnPower.setForeground(hex2Color(theme.getTextColor()));
-        btnPi.setForeground(hex2Color(theme.getTextColor()));
-        btnEqual.setForeground(hex2Color(theme.getBtnEqualTextColor()));
+        // Set text colors for buttons
+        JButton[] buttons = {btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnPoint, btnC, btnBack, btnMod,
+                btnDiv, btnMul, btnSub, btnAdd, btnRoot, btnLog, btnPower, btnPi};
+        for (JButton button : buttons) {
+            button.setForeground(hex2Color(theme.getButtonTextColor())); // Apply button text color
+        }
 
+        // Set text color for the equal button
+        btnEqual.setForeground(hex2Color(theme.getBtnEqualTextColor())); // Apply equal button text color
+
+        // Set background colors for combo boxes
         comboCalculatorType.setBackground(hex2Color(theme.getApplicationBackground()));
         comboTheme.setBackground(hex2Color(theme.getApplicationBackground()));
+
+        // Set text colors for theme selection combo boxes
+        comboCalculatorType.setForeground(hex2Color(theme.getThemeSelectionTextColor())); // Apply theme selection text color
+        comboTheme.setForeground(hex2Color(theme.getThemeSelectionTextColor())); // Apply theme selection text color
+
+        // Set background color for the input screen
         inputScreen.setBackground(hex2Color(theme.getApplicationBackground()));
-        btn0.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn1.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn2.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn3.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn4.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn5.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn6.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn7.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn8.setBackground(hex2Color(theme.getNumbersBackground()));
-        btn9.setBackground(hex2Color(theme.getNumbersBackground()));
-        btnPoint.setBackground(hex2Color(theme.getNumbersBackground()));
-        btnC.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnBack.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnMod.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnDiv.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnMul.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnSub.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnAdd.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnRoot.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnLog.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnPower.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnPi.setBackground(hex2Color(theme.getOperatorBackground()));
-        btnEqual.setBackground(hex2Color(theme.getBtnEqualBackground()));
+
+        // Set text color for the input screen
+        inputScreen.setForeground(hex2Color(theme.getDisplayTextColor())); // Apply display text color
+
+        // Set background colors for number buttons
+        for (JButton button : buttons) {
+            button.setBackground(hex2Color(theme.getNumbersBackground())); // Apply number button background color
+        }
+
+        // Set background colors for operator buttons
+        JButton[] operatorButtons = {btnC, btnBack, btnMod, btnDiv, btnMul, btnSub, btnAdd, btnRoot, btnLog, btnPower, btnPi};
+        for (JButton button : operatorButtons) {
+            button.setBackground(hex2Color(theme.getOperatorBackground())); // Apply operator button background color
+        }
+
+        // Set background color for the equal button
+        btnEqual.setBackground(hex2Color(theme.getBtnEqualBackground())); // Apply equal button background color
+
+        // Apply selection background and text color for combo boxes
+        UIManager.put("ComboBox.selectionBackground", hex2Color(theme.getSelectionBackground())); // Apply combo box selection background color
+        UIManager.put("ComboBox.selectionForeground", hex2Color(theme.getSelectionTextColor())); // Apply combo box selection text color
     }
 }
