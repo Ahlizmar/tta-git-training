@@ -26,7 +26,7 @@ public class CalculatorLogic {
     }
 
     public double log(double number) {
-        return Math.log(number);
+        return Math.log10(number);
     }
     public double PI(double number) {
         return Math.PI * number;
