@@ -57,5 +57,10 @@ public class CalculatorLogic {
     public double tan(double number) {
         return Math.tan(Math.toRadians(number)); // Convert degrees to radians
     }
+
+    
+    public double degrees(double number) {// convert radian to degree
+        return Math.toDegrees(number);
+    }
 }
 
