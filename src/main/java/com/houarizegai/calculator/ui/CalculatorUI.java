@@ -56,6 +56,7 @@ public class CalculatorUI {
     private JButton btnCos; // Added cosine button declaration
     private JButton btnTan; // Added tangent button declaration
     private JButton btnDeg; // Added degrees button declaration
+    private JButton btnRad; // Added radians button declaration
 
     private char selectedOperator = ' ';
     private boolean go = true; // For calculate with Opt != (=)
@@ -146,6 +147,7 @@ public class CalculatorUI {
                     btnCos.setVisible(false); // Hide cosine button in Standard mode
                     btnTan.setVisible(false); // Hide tangent button in Standard mode
                     btnDeg.setVisible(false);// Hide degrees button in Standard mode
+                    btnDeg.setVisible(false);// Hide radians button in Standard mode
                     break;
                 case "Scientific":
                     window.setSize(580, WINDOW_HEIGHT); // Adjust the width and keep the height the same for Scientific mode
@@ -160,6 +162,7 @@ public class CalculatorUI {
                     btnCos.setVisible(true); // Show cosine button in Scientific mode
                     btnTan.setVisible(true); // Show tangent button in Scientific mode
                     btnDeg.setVisible(true); // Show degrees button in Scientific mode
+                    btnRad.setVisible(true); // Show radians button in Scientific mode
                     break;
             }
         });
@@ -655,6 +658,24 @@ public class CalculatorUI {
             }
         });
         btnDeg.setVisible(false);
+
+        btnRad = createButton("rad", columns[5], rows[5]);
+        btnRad.addActionListener(event -> {
+            if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
+                return;
+
+            if (go) {
+                typedValue = logic.radians(Double.parseDouble(inputScreen.getText()));
+                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
+                    inputScreen.setText(String.valueOf((int) typedValue));
+                } else {
+                    inputScreen.setText(String.valueOf(typedValue));
+                }
+                selectedOperator = 'r';
+                addToDisplay = false;
+            }
+        });
+        btnRad.setVisible(false);
     }
 
     private JComboBox<String> createComboBox(String[] items, int x, int y, String toolTip) {
