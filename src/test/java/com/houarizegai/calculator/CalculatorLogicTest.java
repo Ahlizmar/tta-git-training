@@ -1,11 +1,12 @@
 package com.houarizegai.calculator;
 
-import com.houarizegai.calculator.logic.CalculatorLogic;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.houarizegai.calculator.logic.CalculatorLogic;
 
 /**
  * Unit tests for CalculatorLogic class.
@@ -91,6 +92,24 @@ class CalculatorLogicTest {
     }
 
     /**
+     * Tests the factorial method with various inputs.
+     *
+     * @param number the number to be factorial
+     * @param expectedResult the expected result of the factorial
+     */
+    @ParameterizedTest
+    @CsvSource({
+            "3,6",   // Factorial of 3 is 6
+            "4,24",  // Factorial of 4 is 24
+            "5,120", // Factorial of 5 is 120
+            "6,720", // Factorial of 6 is 720
+            "10,3628800", // Factorial of 10 is 3628800
+    })
+    void testFact(int number, int expectedResult) {
+        assertEquals(expectedResult, calculatorLogic.factorial(number), 1e-8);
+    }
+
+    /**
      * Tests the sin method with various inputs in degrees.
      *
      * @param number the angle in degrees
@@ -104,6 +123,52 @@ class CalculatorLogicTest {
     })
     void testSin(double number, double expectedResult) {
         assertEquals(expectedResult, calculatorLogic.sin(number), 1e-8);
+    }
+
+    /**
+     * Tests the degrees method with various inputs in radians.
+     *
+     * @param number the angle in radians
+     * @param expectedResult the expected result of the conversion
+     */
+    @ParameterizedTest
+    @CsvSource({
+            "1.5707963267948966,90",          // π/2 radians to 90 degrees
+            "0.7853981633974483,45",          // π/4 radians to 45 degrees
+            "0,0",                            // 0 radians to 0 degrees
+            "-1.5707963267948966,-90",        // -π/2 radians to -90 degrees
+            "3.141592653589793,180",          // π radians to 180 degrees
+            "6.283185307179586,360",          // 2π radians to 360 degrees
+            "0.5235987755982988,30",          // π/6 radians to 30 degrees
+            "-3.141592653589793,-180",        // -π radians to -180 degrees
+            "4.71238898038469,270",           // 3π/2 radians to 270 degrees
+            "1e-10,5.729577951308232e-9"      // Tiny angle, precision check
+    })
+    void testDegrees(double number, double expectedResult) {
+        assertEquals(expectedResult, calculatorLogic.degrees(number), 1e-8);
+    }
+
+     /**
+     * Tests the degrees method with various inputs in radians.
+     *
+     * @param number the angle in radians
+     * @param expectedResult the expected result of the conversion
+     */
+    @ParameterizedTest
+    @CsvSource({
+            "90,1.5707963267948966",          // 90 degrees to π/2 radians
+            "45,0.7853981633974483",          // 45 degrees to π/4 radians
+            "0,0",                            // 0 degrees to 0 radians
+            "-90,-1.5707963267948966",        // -90 degrees to -π/2 radians
+            "180,3.141592653589793",          // 180 degrees to π radians
+            "360,6.283185307179586",          // 360 degrees to 2π radians
+            "30,0.5235987755982988",          // 30 degrees to π/6 radians
+            "-180,-3.141592653589793",        // -180 degrees to -π radians
+            "270,4.71238898038469",           // 270 degrees to 3π/2 radians
+            "1e-10,5.729577951308232e-9"      // Tiny angle, precision check
+    })
+    void testRadians(double number, double expectedResult) {
+        assertEquals(expectedResult, calculatorLogic.radians(number), 1e-8);
     }
 
     /**
