@@ -474,7 +474,7 @@ public class CalculatorUI {
                 return;
 
             if (go) {
-                typedValue = Math.sqrt(Double.parseDouble(inputScreen.getText()));
+                typedValue = logic.sqrt(Double.parseDouble(inputScreen.getText()));
                 if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int) typedValue));
                 } else {
@@ -551,7 +551,7 @@ public class CalculatorUI {
                 return;
 
             if (go) {
-                typedValue = Math.PI * Double.parseDouble(inputScreen.getText());
+                typedValue = logic.PI(Double.parseDouble(inputScreen.getText()));
                 if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int) typedValue));
                 } else {
