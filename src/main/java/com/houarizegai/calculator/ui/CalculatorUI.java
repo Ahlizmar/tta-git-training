@@ -48,7 +48,7 @@ public class CalculatorUI {
     private JButton btnEqual;
     private JButton btnRoot;
     private JButton btnPower;
-    private JButton btnLog;
+    private JButton btnLn;
     private JButton btnPi; // Added Pi button declaration
     private JButton btnSin; // Added sine button declaration
     private JButton btnCos; // Added cosine button declaration
@@ -108,7 +108,7 @@ public class CalculatorUI {
     private void applyTheme(Theme theme) {
         ThemeApplier.applyTheme(window, comboCalculatorType, comboTheme, inputScreen, btn0, btn1, btn2, btn3,
                 btn4, btn5, btn6, btn7, btn8, btn9, btnPoint, btnC, btnBack, btnMod, btnDiv, btnMul,
-                btnSub, btnAdd, btnRoot, btnLog, btnPower, btnEqual, btnPi, theme);
+                btnSub, btnAdd, btnRoot, btnLn, btnPower, btnEqual, btnPi, theme);
     }
 
     private void initInputScreen(int[] columns, int[] rows) {
@@ -135,7 +135,7 @@ public class CalculatorUI {
                     inputScreen.setBounds(MARGIN_X, MARGIN_Y, 350, 70); // Adjust inputScreen size for Standard mode
                     btnRoot.setVisible(false);
                     btnPower.setVisible(false);
-                    btnLog.setVisible(false);
+                    btnLn.setVisible(false);
                     btnPi.setVisible(false); // Hide Pi button in Standard mode
                     btnSin.setVisible(false); // Hide sine button in Standard mode
                     btnCos.setVisible(false); // Hide cosine button in Standard mode
@@ -146,7 +146,7 @@ public class CalculatorUI {
                     inputScreen.setBounds(MARGIN_X, MARGIN_Y, 510, 70); // Adjust inputScreen size for Scientific mode
                     btnRoot.setVisible(true);
                     btnPower.setVisible(true);
-                    btnLog.setVisible(true);
+                    btnLn.setVisible(true);
                     btnPi.setVisible(true); // Show Pi button in Scientific mode
                     btnSin.setVisible(true); // Show sine button in Scientific mode
                     btnCos.setVisible(true); // Show cosine button in Scientific mode
@@ -496,13 +496,13 @@ public class CalculatorUI {
         btnPower.setFont(new Font(FONT_NAME, Font.PLAIN, 24)); // Updated font for consistency
         btnPower.setVisible(false);
 
-        btnLog = createButton("ln", columns[4], rows[3]);
-        btnLog.addActionListener(event -> {
+        btnLn = createButton("ln", columns[4], rows[3]);
+        btnLn.addActionListener(event -> {
             if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
                 return;
 
             if (go) {
-                typedValue = Math.log(Double.parseDouble(inputScreen.getText()));
+                typedValue = logic.ln(Double.parseDouble(inputScreen.getText()));
                 if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int)typedValue));
                 } else {
@@ -512,7 +512,7 @@ public class CalculatorUI {
                 addToDisplay = false;
             }
         });
-        btnLog.setVisible(false);
+        btnLn.setVisible(false);
 
         btnPi = createButton("\u03C0", columns[4], rows[4]); // Added Pi button initialization
         btnPi.addActionListener(event -> { // Added action listener for Pi button
