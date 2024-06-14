@@ -1,0 +1,37 @@
+# YAML configuration for themes
+themes:
+  - name: Light
+    applicationBackground: f0f3f9   # Background color for the entire application
+    buttonTextColor: 10100f        # Text color for all buttons
+    operatorBackground: e0e0e0     # Background color for operator buttons
+    numbersBackground: ffffff      # Background color for number buttons
+    btnEqualTextColor: 10100f      # Text color for the equal button
+    btnEqualBackground: 007bff     # Background color for the equal button
+    selectionBackground: e0e0e0    # Background color for selections in combo boxes
+    selectionTextColor: 000000de   # Text color for selections in combo boxes
+    displayTextColor: 2e2e2e      # Text color for the display/input screen
+    themeSelectionTextColor: 2e2e2e # Text color for the theme selection combo box
+
+  - name: Dark
+    applicationBackground: 2e2e2e
+    buttonTextColor: 10100f
+    operatorBackground: 4a4a4a
+    numbersBackground: 3e3e3e
+    btnEqualTextColor: 10100f
+    btnEqualBackground: 1e90ff
+    selectionBackground: e0e0e0
+    selectionTextColor: 000000de
+    displayTextColor: f8f8f7
+    themeSelectionTextColor: f8f8f7
+
+  - name: Violet
+    applicationBackground: 41344e
+    buttonTextColor: 10100f
+    operatorBackground: 4e4a59
+    numbersBackground: f8f8f7
+    btnEqualTextColor: 10100f
+    btnEqualBackground: f8f8f7
+    selectionBackground: e0e0e0
+    selectionTextColor: 000000de
+    displayTextColor: f8f8f7
+    themeSelectionTextColor: f8f8f7
