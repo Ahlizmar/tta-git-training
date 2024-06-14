@@ -31,6 +31,9 @@ public class CalculatorLogic {
     public double PI(double number) {
         return Math.PI * number;
     }
+    public double log(double number) {
+        return Math.log10(number);
+    }
 
     // Method to calculate sine of a number (in degrees)
     // Added sine function

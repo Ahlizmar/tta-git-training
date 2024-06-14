@@ -12,14 +12,14 @@ public class ThemeApplier {
                                   JTextField inputScreen, JButton btn0, JButton btn1, JButton btn2, JButton btn3,
                                   JButton btn4, JButton btn5, JButton btn6, JButton btn7, JButton btn8, JButton btn9,
                                   JButton btnPoint, JButton btnC, JButton btnBack, JButton btnMod, JButton btnDiv,
-                                  JButton btnMul, JButton btnSub, JButton btnAdd, JButton btnRoot, JButton btnLog,
-                                  JButton btnPower, JButton btnEqual, JButton btnPi, Theme theme) {
+                                  JButton btnMul, JButton btnSub, JButton btnAdd, JButton btnRoot, JButton btnLn, 
+                                  JButton btnLog, JButton btnPower, JButton btnEqual, JButton btnPi, Theme theme) {
         // Set application background color
         window.getContentPane().setBackground(hex2Color(theme.getApplicationBackground()));
 
         // Set text colors for buttons
         JButton[] buttons = {btn0, btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnPoint, btnC, btnBack, btnMod,
-                btnDiv, btnMul, btnSub, btnAdd, btnRoot, btnLog, btnPower, btnPi};
+                btnDiv, btnMul, btnSub, btnAdd, btnRoot, btnLn, btnLog, btnPower, btnPi};
         for (JButton button : buttons) {
             button.setForeground(hex2Color(theme.getButtonTextColor())); // Apply button text color
         }
@@ -47,7 +47,7 @@ public class ThemeApplier {
         }
 
         // Set background colors for operator buttons
-        JButton[] operatorButtons = {btnC, btnBack, btnMod, btnDiv, btnMul, btnSub, btnAdd, btnRoot, btnLog, btnPower, btnPi};
+        JButton[] operatorButtons = {btnC, btnBack, btnMod, btnDiv, btnMul, btnSub, btnAdd, btnRoot, btnLn, btnLog, btnPower, btnPi};
         for (JButton button : operatorButtons) {
             button.setBackground(hex2Color(theme.getOperatorBackground())); // Apply operator button background color
         }
