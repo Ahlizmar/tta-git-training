@@ -51,6 +51,7 @@ public class CalculatorUI {
     private JButton btnLn; // changed natural logarithm button declaration
     private JButton btnLog; // Added log button declaration
     private JButton btnPi; // Added Pi button declaration
+    private JButton btnFact; // Added factorial button declaration
     private JButton btnSin; // Added sine button declaration
     private JButton btnCos; // Added cosine button declaration
     private JButton btnTan; // Added tangent button declaration
@@ -139,6 +140,7 @@ public class CalculatorUI {
                     btnLn.setVisible(false);
                     btnLog.setVisible(false); // Hide log button in Standard mode
                     btnPi.setVisible(false); // Hide Pi button in Standard mode
+                    btnFact.setVisible(false);
                     btnSin.setVisible(false); // Hide sine button in Standard mode
                     btnCos.setVisible(false); // Hide cosine button in Standard mode
                     btnTan.setVisible(false); // Hide tangent button in Standard mode
@@ -151,6 +153,7 @@ public class CalculatorUI {
                     btnLn.setVisible(true);
                     btnLog.setVisible(true); // Show log button in Scientific mode
                     btnPi.setVisible(true); // Show Pi button in Scientific mode
+                    btnFact.setVisible(true); // Show factorial button in Scientific mode
                     btnSin.setVisible(true); // Show sine button in Scientific mode
                     btnCos.setVisible(true); // Show cosine button in Scientific mode
                     btnTan.setVisible(true); // Show tangent button in Scientific mode
@@ -498,7 +501,8 @@ public class CalculatorUI {
         });
         btnPower.setFont(new Font(FONT_NAME, Font.PLAIN, 24)); // Updated font for consistency
         btnPower.setVisible(false);
-
+        
+        // modified btnlog to btnLn
         btnLn = createButton("ln", columns[4], rows[3]);
         btnLn.addActionListener(event -> {
             if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
@@ -516,7 +520,7 @@ public class CalculatorUI {
             }
         });
         btnLn.setVisible(false);
-
+        // new log button
         btnLog = createButton("log", columns[4], rows[4]);
         btnLog.addActionListener(event -> {
             if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
@@ -552,6 +556,24 @@ public class CalculatorUI {
             }
         });
         btnPi.setVisible(false); // Set Pi button visibility to false initially
+
+        btnFact = createButton("!", columns[4], rows[5]);
+        btnFact.addActionListener(event -> {
+            if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
+                return;
+
+            if (go) {
+                typedValue = logic.factorial(Integer.parseInt(inputScreen.getText()));
+                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
+                    inputScreen.setText(String.valueOf((int) typedValue));
+                } else {
+                    inputScreen.setText(String.valueOf(typedValue));
+                }
+                selectedOperator = 'f';
+                addToDisplay = false;
+            }
+        });
+        btnFact.setVisible(false);
 
         btnSin = createButton("sin", columns[5], rows[1]);
         btnSin.addActionListener(event -> {

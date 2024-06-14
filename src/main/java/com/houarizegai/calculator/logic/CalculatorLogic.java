@@ -25,15 +25,22 @@ public class CalculatorLogic {
         return Math.sqrt(number);
     }
 
-    public double ln(double number) {
+    public double ln(double number) { // ln logic
         return Math.log(number);
     }
-    public double PI(double number) {
+    public double PI(double number) { // PI logic
         return Math.PI * number;
     }
-    public double log(double number) {
+    public double log(double number) { // log logic
         return Math.log10(number);
     }
+
+    public int factorial(int number) { // need exeption 
+        int res = 1, i; 
+        for (i = 2; i <= number; i++) 
+            res *= i; 
+        return res; 
+    } 
 
     // Method to calculate sine of a number (in degrees)
     // Added sine function
