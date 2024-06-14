@@ -73,7 +73,7 @@ class CalculatorLogicTest {
             "10,2.302585092994046"
     })
     void testLog(double number, double expectedResult) {
-        assertEquals(expectedResult, calculatorLogic.log(number), 1e-8);
+        assertEquals(expectedResult, calculatorLogic.ln(number), 1e-8);
     }
 
     /**
