@@ -62,7 +62,7 @@ public class CalculatorLogic {
         return Math.toDegrees(number);
     }
 
-    public double radians(double number) {
+    public double radians(double number) { // convert degree to radian
         return Math.toRadians(number);
     }
 

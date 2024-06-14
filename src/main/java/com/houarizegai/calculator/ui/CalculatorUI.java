@@ -563,6 +563,7 @@ public class CalculatorUI {
         });
         btnPi.setVisible(false); // Set Pi button visibility to false initially
 
+        // Added factorial button
         btnFact = createButton("!", columns[4], rows[5]);
         btnFact.addActionListener(event -> {
             if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
@@ -641,6 +642,7 @@ public class CalculatorUI {
         btnTan.setVisible(false); // Set tangent button visibility to false initially
         window.add(btnTan); // Add tangent button to window
 
+        // Added degrees button
         btnDeg = createButton("deg", columns[5], rows[4]);
         btnDeg.addActionListener(event -> {
             if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
@@ -659,6 +661,7 @@ public class CalculatorUI {
         });
         btnDeg.setVisible(false);
 
+        // Added radians button
         btnRad = createButton("rad", columns[5], rows[5]);
         btnRad.addActionListener(event -> {
             if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
