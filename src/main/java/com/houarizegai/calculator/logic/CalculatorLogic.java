@@ -72,19 +72,24 @@ public class CalculatorLogic {
         }
     }
 
-    public int factorial(int number) { // need exeption 
-        int res = 1, i; 
-        try{
-            if (number % 10 != 0) {
-                throw new ArithmeticException("Cannot calculate factorial of a decimal number");
+    public int factorial(int number) { 
+        int res = 1; 
+        
+        if (number >= 0) {
+            for (int i = 2; i <= number; i++) {
+                res *= i;
             }
-            for (i = 2; i <= number; i++) {res *= i;} 
+            System.out.println(res);
             return res;
-
-        }catch (ArithmeticException e) {
-            // Handle error (return a default value, rethrow, etc.)
-            return -1; // Return -1 to indicate an error in calculation
+        } else {
+            for (int i = -2; i >= number; i--) {
+                res *= i;
+                System.out.println(i + " " + res);
+            }
+            System.out.println(- Math.abs(res));
+            return - Math.abs(res);
         }
+        
     } 
 
     // Method to calculate sine of a number (in degrees)

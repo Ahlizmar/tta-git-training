@@ -588,9 +588,9 @@ public class CalculatorUI {
                 try {
                     number = Integer.parseInt(inputScreen.getText());
                 } catch (NumberFormatException e) {
-                    // Handle the exception here, for example:
+                    // Handle the exception here
                     inputScreen.setText("Domain error");
-                    return; // or throw an exception, display an error message, etc.
+                    return; 
                 }
                 typedValue = logic.factorial(number);
                 

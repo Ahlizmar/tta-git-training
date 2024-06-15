@@ -55,7 +55,8 @@ class CalculatorLogicTest {
     @CsvSource({
             "9,3",
             "16,4",
-            "25,5"
+            "25,5",
+            "-3,NaN"
     })
     void testSqrt(double number, double expectedResult) {
         assertEquals(expectedResult, calculatorLogic.sqrt(number));
@@ -71,7 +72,8 @@ class CalculatorLogicTest {
     @CsvSource({
             "1,0",
             "2.718281828459045,1",  // Approximation of Math.E
-            "10,2.302585092994046"
+            "10,2.302585092994046",
+            "-3,NaN"
     })
     void testLog(double number, double expectedResult) {
         assertEquals(expectedResult, calculatorLogic.ln(number), 1e-8);
@@ -104,6 +106,8 @@ class CalculatorLogicTest {
             "5,120", // Factorial of 5 is 120
             "6,720", // Factorial of 6 is 720
             "10,3628800", // Factorial of 10 is 3628800
+            "-3,-6", // Factorial of -3 is -6
+            //"2.3, exception", // Factorial of 2.3 is exception
     })
     void testFact(int number, int expectedResult) {
         assertEquals(expectedResult, calculatorLogic.factorial(number), 1e-8);
