@@ -6,7 +6,7 @@ All important changes to this project will be documented in this file.
 - Introduced `CalculatorLogic` class to handle all calculation-related functionalities.
 - Created `ThemeLoader` class to handle loading themes from the YAML configuration file.
 - Added `ThemeApplier` class to apply themes to UI components, centralizing theme application logic.
-- - Added Violet Theme.
+- Added Violet Theme.
 - Added new buttons for sine (sin), cosine (cos), and tangent (tan) functions in the Calculator UI.
 - Implemented the logic for sine, cosine, and tangent functions in the `CalculatorLogic` class.
 - Added unit tests for `CalculatorLogic` mathematical functions.
