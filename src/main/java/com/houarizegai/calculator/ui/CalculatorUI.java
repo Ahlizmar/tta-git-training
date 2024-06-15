@@ -210,20 +210,22 @@ public class CalculatorUI {
         btnDiv.addActionListener(event -> {
             if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
                 return;
-
-            if (go) {
-                typedValue = logic.calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
-                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
-                    inputScreen.setText(String.valueOf((int) typedValue));
+            
+                if (go) {
+                    typedValue = logic.calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
+            
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
+                        inputScreen.setText(String.valueOf((int) typedValue));
+                        
+                    } else {
+                        inputScreen.setText(String.valueOf(typedValue));
+                    }
+                    selectedOperator = '/';
+                    go = false;
+                    addToDisplay = false;
                 } else {
-                    inputScreen.setText(String.valueOf(typedValue));
+                    selectedOperator = '/';
                 }
-                selectedOperator = '/';
-                go = false;
-                addToDisplay = false;
-            } else {
-                selectedOperator = '/';
-            }
         });
 
         btn7 = createButton("7", columns[0], rows[2]);
@@ -458,7 +460,11 @@ public class CalculatorUI {
 
             if (go) {
                 typedValue = logic.calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
-                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
+                if(Double.isNaN(typedValue) && selectedOperator == '/') {
+                    inputScreen.setText("Cannot divide by 0");
+                } else if(Double.isNaN(typedValue) && selectedOperator == '^') {
+                    inputScreen.setText("0^0 is undefined");
+                } else if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int) typedValue));
                 } else {
                     inputScreen.setText(String.valueOf(typedValue));
@@ -475,7 +481,9 @@ public class CalculatorUI {
 
             if (go) {
                 typedValue = logic.sqrt(Double.parseDouble(inputScreen.getText()));
-                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
+                if(Double.isNaN(typedValue)) {
+                    inputScreen.setText("Keep it real");
+                } else if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int) typedValue));
                 } else {
                     inputScreen.setText(String.valueOf(typedValue));
@@ -516,7 +524,10 @@ public class CalculatorUI {
 
             if (go) {
                 typedValue = logic.ln(Double.parseDouble(inputScreen.getText()));
-                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
+
+                if(Double.isNaN(typedValue)) {
+                    inputScreen.setText("Domain error");
+                } else if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int)typedValue));
                 } else {
                     inputScreen.setText(String.valueOf(typedValue));
@@ -534,7 +545,10 @@ public class CalculatorUI {
 
             if (go) {
                 typedValue = logic.log(Double.parseDouble(inputScreen.getText()));
-                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
+
+                if(Double.isNaN(typedValue)) {
+                    inputScreen.setText("Domain error");
+                } else if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int)typedValue));
                 } else {
                     inputScreen.setText(String.valueOf(typedValue));
@@ -570,7 +584,16 @@ public class CalculatorUI {
                 return;
 
             if (go) {
-                typedValue = logic.factorial(Integer.parseInt(inputScreen.getText()));
+                int number;
+                try {
+                    number = Integer.parseInt(inputScreen.getText());
+                } catch (NumberFormatException e) {
+                    // Handle the exception here, for example:
+                    inputScreen.setText("Domain error");
+                    return; // or throw an exception, display an error message, etc.
+                }
+                typedValue = logic.factorial(number);
+                
                 if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int) typedValue));
                 } else {
