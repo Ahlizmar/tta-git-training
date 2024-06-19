@@ -63,7 +63,7 @@ class CalculatorLogicTest {
     }
 
     /**
-     * Tests the log method with various inputs.
+     * Tests the ln method with various inputs.
      *
      * @param number the number to find the logarithm of
      * @param expectedResult the expected result of the logarithm
@@ -75,8 +75,25 @@ class CalculatorLogicTest {
             "10,2.302585092994046",
             "-3,NaN"
     })
-    void testLog(double number, double expectedResult) {
+    void testLn(double number, double expectedResult) {
         assertEquals(expectedResult, calculatorLogic.ln(number), 1e-8);
+    }
+
+    /**
+     * Tests the log method with various inputs.
+     *
+     * @param number the number to find the logarithm of
+     * @param expectedResult the expected result of the logarithm
+     */
+    @ParameterizedTest
+    @CsvSource({
+            "1,0",
+            "2.718281828459045,.4342944819032518",  // Approximation of Math.E
+            "10,1",
+            "-3,NaN"
+    })
+    void testLog(double number, double expectedResult) {
+        assertEquals(expectedResult, calculatorLogic.log(number), 1e-8);
     }
 
     /**
