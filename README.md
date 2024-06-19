@@ -6,6 +6,7 @@ This repository is a clone of the open-source project [Calculator](https://githu
 
 - `README.md`: This file. Provides an overview of the repository.
 - `CHANGELOG.md`: Contains a chronological list of changes made to the project.
+- `requirements.txt`: Lists dependencies required for the project.
 - `testfile.txt`: A sample file created for testing Git commands and features.
 - Other files and directories as needed for various assignments and tasks.
 
