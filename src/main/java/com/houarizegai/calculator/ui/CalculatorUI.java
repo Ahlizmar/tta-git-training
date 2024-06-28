@@ -192,18 +192,24 @@ public class CalculatorUI {
 
         btnMod = createButton("%", columns[2], rows[1]);
         btnMod.addActionListener(event -> {
-            if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()) || !go)
+            if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
                 return;
-
-            typedValue = logic.calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
-            if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
-                inputScreen.setText(String.valueOf((int) typedValue));
-            } else {
-                inputScreen.setText(String.valueOf(typedValue));
-            }
-            selectedOperator = '%';
-            go = false;
-            addToDisplay = false;
+            
+                if (go) {
+                    typedValue = logic.calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
+            
+                    if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
+                        inputScreen.setText(String.valueOf((int) typedValue));
+                        
+                    } else {
+                        inputScreen.setText(String.valueOf(typedValue));
+                    }
+                    selectedOperator = '%';
+                    go = false;
+                    addToDisplay = false;
+                } else {
+                    selectedOperator = '%';
+                }
         });
 
         btnDiv = createButton("/", columns[3], rows[1]);
@@ -501,7 +507,7 @@ public class CalculatorUI {
 
             if (go) {
                 typedValue = logic.calculate(typedValue, Double.parseDouble(inputScreen.getText()), selectedOperator);
-                if (Pattern.matches("[-]?[\\d]+[.][0]*", String.valueOf(typedValue))) {
+                if (Pattern.matches("[-]?[\\d][.][0]*", String.valueOf(typedValue))) {
                     inputScreen.setText(String.valueOf((int) typedValue));
                 } else {
                     inputScreen.setText(String.valueOf(typedValue));
@@ -519,8 +525,6 @@ public class CalculatorUI {
         // modified btnlog to btnLn
         btnLn = createButton("ln", columns[4], rows[3]);
         btnLn.addActionListener(event -> {
-            if (!Pattern.matches(DOUBLE_OR_NUMBER_REGEX, inputScreen.getText()))
-                return;
 
             if (go) {
                 typedValue = logic.ln(Double.parseDouble(inputScreen.getText()));
@@ -723,4 +727,6 @@ public class CalculatorUI {
         window.add(btn);
         return btn;
     }
+
+
 }

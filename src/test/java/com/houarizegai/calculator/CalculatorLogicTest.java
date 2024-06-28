@@ -38,8 +38,13 @@ class CalculatorLogicTest {
             "2,8,-,-6",
             "44.5,10,*,445",
             "320,5,/,64",
+            "3,0,/,NaN",
             "3,5,%,3",
-            "5,3,^,125"
+            "5,3,^,125",
+            "0,0,^,NaN",
+            "0,3,^,0",
+            "3,0,^,1",
+            "0,0,9,0"
     })
     void testCalculation(double firstNumber, double secondNumber, char operator, double expectedResult) {
         assertEquals(expectedResult, calculatorLogic.calculate(firstNumber, secondNumber, operator));

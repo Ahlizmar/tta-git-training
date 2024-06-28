@@ -20,7 +20,7 @@ public class CalculatorLogic {
                     return firstNumber % secondNumber;
                 case '^':
                     if (secondNumber == 0 && firstNumber == 0) {
-                        throw new ArithmeticException("Cannot divide by 0");
+                        throw new ArithmeticException("Cannot pow 0 and 0");
                     }
                     return Math.pow(firstNumber, secondNumber);
                 default:
